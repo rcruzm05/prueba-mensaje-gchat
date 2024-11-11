@@ -1,0 +1,18 @@
+---
+- name: Imprimir facts del sistema
+  hosts: localhost
+  connection: local
+  gather_facts: true
+  tasks:
+    # Notificate to Google Chat
+    - name: Send a notification to Google Chat
+      ansible.builtin.uri:
+        url: |
+          https://chat.googleapis.com/v1/spaces/AAAAMVrUhF4/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=QTsMl52Jh4m2Qdy2xOEheyBmMF-YimHMeVOAmYlmT6I
+        method: POST
+        headers:
+          Content-Type: "application/json"
+        body_format: json
+        body:
+          text: "Este es un mensaje de prueba. Viva la virgen de Guadalupe, diría Alex Lora."
+      delegate_to: localhost
